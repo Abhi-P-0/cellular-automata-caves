@@ -7,6 +7,7 @@ int ALIVE = 1;
 int DEAD = 0;
 int seed = 1337;
 int aliveProb = 50;
+int generations = 10;
 
 int map[MAP_HEIGHT][MAP_WIDTH];
 
@@ -58,9 +59,9 @@ void displayCave() {
         for (int w = 0; w < MAP_WIDTH; w++) {
             // std::cout << map[h][w];
             if (map[h][w]) {
-                std::cout << ".";
-            } else {
                 std::cout << "#";
+            } else {
+                std::cout << ".";
             }
 
         }
@@ -68,6 +69,8 @@ void displayCave() {
         std::cout << std::endl;
 
     }
+
+    std::cout << "\n";
 
 }
 
@@ -90,7 +93,11 @@ void updateCells() {
 int main() {
     genCave();
 
-    updateCells();
+    for (int gen = 0; gen < generations; gen++) {
+        updateCells();
+
+        displayCave();
+    }
     
     displayCave();
 
