@@ -29,12 +29,22 @@ void genCave() {
 }
 
 void displayCave() {
-    
+    for (int h = 0; h < MAP_HEIGHT; h++) {
+        for (int w = 0; w < MAP_WIDTH; w++) {
+            std::cout << map[h][w];
+
+        }
+
+        std::cout << std::endl;
+
+    }
 
 }
 
 int main() {
-    
+    genCave();
+
+    displayCave();
 
     return 0;
 }
