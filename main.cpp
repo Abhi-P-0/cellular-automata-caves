@@ -36,19 +36,19 @@ int near(int x, int y) {
             if (!(w == x && h == y)) {
                 count += map[h][w];
 
-                std::cout << map[h][w];
+                // std::cout << map[h][w];
             
             } else {
-                std::cout << ".";
+                // std::cout << ".";
 
             }
         }
 
-        std::cout << std::endl;
+        // std::cout << std::endl;
     
     }
 
-    std::cout << count << std::endl;
+    // std::cout << count << std::endl;
 
     return count;
 }
@@ -56,7 +56,12 @@ int near(int x, int y) {
 void displayCave() {
     for (int h = 0; h < MAP_HEIGHT; h++) {
         for (int w = 0; w < MAP_WIDTH; w++) {
-            std::cout << map[h][w];
+            // std::cout << map[h][w];
+            if (map[h][w]) {
+                std::cout << ".";
+            } else {
+                std::cout << "#";
+            }
 
         }
 
@@ -66,11 +71,28 @@ void displayCave() {
 
 }
 
+void updateCells() {
+    int count;
+    
+    for (int h = 1; h < MAP_HEIGHT - 1; h++) {
+        for (int w = 1; w < MAP_WIDTH - 1; w++) {
+            count = near(w, h);
+
+            if (map[h][w] == DEAD && count >= 6) map[h][w] = ALIVE;
+            
+            if (map[h][w] == ALIVE && count <= 3) map[h][w] = DEAD;
+
+        }
+
+    }
+}
+
 int main() {
     genCave();
 
-    // displayCave();
-    near(20, 20);
+    updateCells();
+    
+    displayCave();
 
     return 0;
 }
